@@ -1,6 +1,14 @@
 import { ArrowDownLeft } from "lucide-react";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 const FeaturesSection = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1500,
+      once: false,
+    });
+  }, []);
   return (
     <div>
       <div className="container mx-auto max-w-[1440px]">
@@ -22,7 +30,11 @@ const FeaturesSection = () => {
         </div>
         <div className="flex items-start justify-between overflow-hidden">
           <div className="left mt-[160px]">
-            <ul className="flex flex-col items-center gap-[10px]">
+            <ul
+              data-aos="fade-right"
+              data-aos-duration="1000"
+              className="flex flex-col items-center gap-[10px]"
+            >
               <li className="mb-[10px]">
                 <img
                   src="https://nov-one.myshopify.com/cdn/shop/files/icon-9-5_40x.png?v=1713176185"
@@ -35,7 +47,11 @@ const FeaturesSection = () => {
                 Standard USB 3.0 cable
               </li>
             </ul>
-            <ul className="flex flex-col items-center gap-[10px] mt-[95px]">
+            <ul
+              data-aos="fade-right"
+              data-aos-duration="1300"
+              className="flex flex-col items-center gap-[10px] mt-[95px]"
+            >
               <li className="mb-[10px]">
                 <img
                   src="https://nov-one.myshopify.com/cdn/shop/files/icon-9-6_40x.png?v=1713176184"
@@ -48,7 +64,11 @@ const FeaturesSection = () => {
                 Battery life last up to 24 hours
               </li>
             </ul>
-            <ul className="flex flex-col items-center gap-[10px] mt-[95px]">
+            <ul
+              data-aos="fade-right"
+              data-aos-duration="1500"
+              className="flex flex-col items-center gap-[10px] mt-[95px]"
+            >
               <li className="mb-[10px]">
                 <img
                   src="https://nov-one.myshopify.com/cdn/shop/files/icon-9-5_40x.png?v=1713176185"
@@ -64,7 +84,11 @@ const FeaturesSection = () => {
               </li>
             </ul>
           </div>
-          <div className="mid w-[690px] h-[810px] mt-[42px]">
+          <div
+            data-aos="zoom-in"
+            data-aos-duration="1300"
+            className="mid w-[690px] h-[810px] mt-[42px]"
+          >
             <img
               src="https://nov-one.myshopify.com/cdn/shop/files/img-9-1_768x.jpg?v=1713175576"
               alt=""
@@ -72,7 +96,11 @@ const FeaturesSection = () => {
             />
           </div>
           <div className="right mt-[160px]">
-            <ul className="flex flex-col items-center gap-[10px]">
+            <ul
+              data-aos="fade-left"
+              data-aos-duration="1000"
+              className="flex flex-col items-center gap-[10px]"
+            >
               <li className="mb-[10px]">
                 <img
                   src="https://nov-one.myshopify.com/cdn/shop/files/icon-9-8_40x.png?v=1713176185"
@@ -85,7 +113,11 @@ const FeaturesSection = () => {
                 Super fast connection
               </li>
             </ul>
-            <ul className="flex flex-col items-center gap-[10px] mt-[95px]">
+            <ul
+              data-aos="fade-left"
+              data-aos-duration="1300"
+              className="flex flex-col items-center gap-[10px] mt-[95px]"
+            >
               <li className="mb-[10px]">
                 <img
                   src="https://nov-one.myshopify.com/cdn/shop/files/icon-9-9_40x.png?v=1713176185"
@@ -98,7 +130,11 @@ const FeaturesSection = () => {
                 Guaranteed excellent sound quality
               </li>
             </ul>
-            <ul className="flex flex-col items-center gap-[10px] mt-[95px]">
+            <ul
+              data-aos="fade-left"
+              data-aos-duration="1500"
+              className="flex flex-col items-center gap-[10px] mt-[95px]"
+            >
               <li className="mb-[10px]">
                 <img
                   src="https://nov-one.myshopify.com/cdn/shop/files/icon-9-10_40x.png?v=1713176185"

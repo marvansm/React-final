@@ -1,9 +1,30 @@
-import { Check, Clock3, Heart, Minus, Plus, ShoppingBag, Star, Truck } from "lucide-react";
-
+import {
+  Check,
+  Clock3,
+  Heart,
+  Minus,
+  Plus,
+  ShoppingBag,
+  Star,
+  Truck,
+} from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 const AddtoCardSection = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1500,
+      once: false,
+    });
+  }, []);
   return (
     <div className="container mx-auto max-w-[1440px] mt-[141px]">
-      <div className="grid grid-cols-12 gap-24">
+      <div
+        data-aos="fade-up"
+        data-aos-duration="1500"
+        className="grid grid-cols-12 gap-24"
+      >
         <div className="col-span-6 ">
           <div className="flex flex-col gap-4">
             <div className="border border-gray-200 h-full w-full rounded-2xl overflow-hidden">
@@ -111,7 +132,7 @@ const AddtoCardSection = () => {
             </div>
             <div className="flex flex-col items-center gap-2.5 mt-[31px]">
               <button className="bg-[#2d6fde] text-white h-[50px]  justify-center w-full hover:bg-[#734baf] flex items-center gap-2.5 duration-300 cursor-pointer">
-             <ShoppingBag  color="white" size={18}/>   
+                <ShoppingBag color="white" size={18} /> Add to card
               </button>
               <button className="bg-[#000] text-white h-[50px] flex items-center justify-center w-full hover:bg-white hover:text-[#2d6fde] border duration-300">
                 Buy It Now

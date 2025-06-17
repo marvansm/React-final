@@ -1,18 +1,14 @@
-import HomePage from "./Featured/Pages/Home/Page/Home";
-import Layout from "./Layout";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RouterProvider } from "react-router";
+import { router } from "./router";
+import { CardProvider } from "./Provider/AddToCart";
 const queryClient = new QueryClient();
 const App = () => {
   return (
     <div>
       <QueryClientProvider client={queryClient}>
-        <Layout>
-          <HomePage />
-        </Layout>
+        <CardProvider />
+        <RouterProvider router={router} />
       </QueryClientProvider>
     </div>
   );

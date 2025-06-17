@@ -1,7 +1,16 @@
 import { Play } from "lucide-react";
 import { useState } from "react";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 const VideoSection = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1500,
+      once: false,
+    });
+  }, []);
+
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlay = () => {
@@ -9,7 +18,7 @@ const VideoSection = () => {
   };
 
   return (
-    <div className="my-[141px]">
+    <div data-aos="fade-up" data-aos-duration="1600" className="my-[141px]">
       <div className="relative">
         <video
           autoPlay

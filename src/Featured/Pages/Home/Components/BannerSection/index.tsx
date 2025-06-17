@@ -3,7 +3,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
+import MotionImage from "../../../../Common/MotionImages";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 const BannerSection = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1500,
+      once: false,
+    });
+  }, []);
   return (
     <div className="bg-[url(https://nov-one.myshopify.com/cdn/shop/files/s-9-bg_1920x.png?v=1713147206)] bg-cover bg-center bg-no-repeat h-[910px] flex items-center justify-center pt-10">
       <Swiper
@@ -19,23 +29,30 @@ const BannerSection = () => {
       >
         <SwiperSlide>
           <div className="container mx-auto max-w-[1440px]">
-            <div className="grid grid-cols-2  items-center justify-center">
+            <div data-aos="fade-out"
+              data-aos-duration="1300" className="grid grid-cols-2  items-center justify-center">
               <div className="">
                 <div className="">
-                  <h2 className="font-bold text-[72px] leading-[1.3] tracking-[0px] capitalize text-white mb-[40px]">
+                  <h2
+                    data-aos="fade-right"
+                    className="font-bold text-[72px] leading-[1.3] tracking-[0px] capitalize text-white mb-[40px]"
+                  >
                     Buy Headphones <br />
                     And Style Them
                     <br />
                     Acttractively
                   </h2>
-                  <p className="text-[16px] text-[#dadadf] mb-[40px]">
+                  <p
+                    data-aos="fade-left"
+                    className="text-[16px] text-[#dadadf] mb-[40px]"
+                  >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Elementum lectus cursus libero <br /> cursus. Venenatis
                     aenean volutpat vitae sed porttitor venenatis. In a diam
                     praesent tortora <br /> enim pellentesque dolor, gravida
                     cras. At tempus pretium.
                   </p>
-                  <div className="flex items-center gap-9">
+                  <div data-aos="fade-left" className="flex items-center gap-9">
                     <button className="text-[18px] w-[290px] h-[78px] bg-[#2d6fde] hover:text-[#2d6fde] hover:bg-white duration-300 cursor-pointer text-white font-bold">
                       Buy Now! Discount 30%
                     </button>
@@ -46,11 +63,12 @@ const BannerSection = () => {
                 </div>
               </div>
               <div className="flex items-center justify-center">
-                <div className="h-[739.016px] w-full">
-                  <img
-                    src="https://nov-one.myshopify.com/cdn/shop/files/s-9-img_375x.png?v=1713151818"
-                    alt=""
-                    className="w-full h-full object-contain"
+                <div className="h-[739px] w-full">
+                  <MotionImage
+                    image={
+                      "https://nov-one.myshopify.com/cdn/shop/files/s-9-img_375x.png?v=1713151818"
+                    }
+                    className={"w-full h-full object-contain"}
                   />
                 </div>
               </div>
@@ -62,20 +80,26 @@ const BannerSection = () => {
             <div className="grid grid-cols-2  items-center justify-center">
               <div className="">
                 <div className="">
-                  <h2 className="font-bold text-[72px] leading-[1.3] tracking-[0px] capitalize text-white mb-[40px]">
+                  <h2
+                    data-aos="fade-right"
+                    className="font-bold text-[72px] leading-[1.3] tracking-[0px] capitalize text-white mb-[40px]"
+                  >
                     Buy Headphones <br />
                     And Style Them
                     <br />
                     Acttractively
                   </h2>
-                  <p className="text-[16px] text-[#dadadf] mb-[40px]">
+                  <p
+                    data-aos="fade-left"
+                    className="text-[16px] text-[#dadadf] mb-[40px]"
+                  >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Elementum lectus cursus libero <br /> cursus. Venenatis
                     aenean volutpat vitae sed porttitor venenatis. In a diam
                     praesent tortora <br /> enim pellentesque dolor, gravida
                     cras. At tempus pretium.
                   </p>
-                  <div className="flex items-center gap-9">
+                  <div data-aos="fade-left" className="flex items-center gap-9">
                     <button className="text-[18px] w-[290px] h-[78px] bg-[#2d6fde] hover:text-[#2d6fde] hover:bg-white duration-300 cursor-pointer text-white font-bold">
                       Buy Now! Discount 30%
                     </button>
@@ -87,10 +111,11 @@ const BannerSection = () => {
               </div>
               <div className="flex items-center justify-center">
                 <div className="h-[739.016px] w-full">
-                  <img
-                    src="https://nov-one.myshopify.com/cdn/shop/files/s-9-2-img_375x.png?v=1713498031"
-                    alt=""
-                    className="w-full h-full object-contain"
+                  <MotionImage
+                    image={
+                      "https://nov-one.myshopify.com/cdn/shop/files/s-9-2-img_375x.png?v=1713498031"
+                    }
+                    className={"w-full h-full object-contain"}
                   />
                 </div>
               </div>

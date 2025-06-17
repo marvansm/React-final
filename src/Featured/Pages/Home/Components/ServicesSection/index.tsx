@@ -3,12 +3,20 @@ import { Scrollbar } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/scrollbar";
 import CountUp from "react-countup";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 const ServicesSection = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1500,
+      once: false,
+    });
+  }, []);
   return (
     <div>
       <div className="container mx-auto max-w-[1440px]">
-        <div className="mt-[140px]">
+        <div data-aos="fade-up" className="mt-[140px]">
           <h1 className="text-[#222222] text-[40px] tracking-[0px] leading-[1.5] font-bold pb-[20px]">
             Why buy direct form <span className="text-[#266ff6]">One</span> ?
           </h1>
@@ -18,7 +26,7 @@ const ServicesSection = () => {
             sed porttitor venenatis.
           </p>
         </div>
-        <div className="mt-[60px]">
+        <div data-aos="fade-up" className="mt-[60px]">
           <Swiper
             scrollbar={{
               hide: true,
@@ -29,7 +37,7 @@ const ServicesSection = () => {
             modules={[Scrollbar]}
             className="mySwiper my-6 items-stretch"
           >
-            <SwiperSlide className="w-[480px]">
+            <SwiperSlide className="w-[480px] pb-[50px]">
               <div className="p-[25px] min-h-[250px]  border border-gray-200 ">
                 <div className="">
                   <img
@@ -47,7 +55,7 @@ const ServicesSection = () => {
                 </div>
               </div>
             </SwiperSlide>
-            <SwiperSlide className="w-[480px] h-full">
+            <SwiperSlide className="w-[480px] h-full pb-[50px]">
               <div className="p-[25px] min-h-[250px]  border border-gray-200 ">
                 <div className="">
                   <img
@@ -64,7 +72,7 @@ const ServicesSection = () => {
                 </div>
               </div>
             </SwiperSlide>
-            <SwiperSlide className="w-[480px]">
+            <SwiperSlide className="w-[480px] pb-[50px]">
               <div className="p-[25px] min-h-[250px]  border border-gray-200 ">
                 <div className="">
                   <img
@@ -82,7 +90,7 @@ const ServicesSection = () => {
                 </div>
               </div>
             </SwiperSlide>
-            <SwiperSlide className="w-[480px]">
+            <SwiperSlide className="w-[480px] pb-[50px]">
               <div className="p-[25px] min-h-[250px]  border border-gray-200 ">
                 <div className="">
                   <img
@@ -124,7 +132,7 @@ const ServicesSection = () => {
               <ul>
                 <li className="text-[#5b5b5f] text-[16px] mb-[15px]">Up to</li>
                 <li className="text-[40px] text-[#1c1c1f] font-bold mb-[15px]">
-                  <CountUp end={5} duration={1.75} enableScrollSpy ></CountUp>
+                  <CountUp end={5} duration={1.75} enableScrollSpy></CountUp>
                   hr
                 </li>
                 <li className="text-[#5b5b5f] text-[16px] ">
