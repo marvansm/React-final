@@ -3,6 +3,7 @@ import {
   Grid3x3,
   LayoutGrid,
   Menu,
+  SearchIcon,
   SlidersHorizontal,
   TableProperties,
   Tag,
@@ -15,7 +16,9 @@ import { GetApiData } from "../../../../../Services/api";
 import { clsx } from "clsx";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useCard } from "../../../../../Provider/AddToCart";
 const Collections = () => {
+  const { AddToCard } = useCard();
   const [ProductCategories, SetProductCategory] = useState("");
   const [InStock, SetInStock] = useState("");
   const [ProductTypes, SetProductTypes] = useState("");
@@ -29,6 +32,7 @@ const Collections = () => {
   const [LoadMoreTwo, SetLoadMoreTwo] = useState(4);
   const [LoadMoreThird, SetLoadMoreThird] = useState(3);
   const [showMore, setShowMore] = useState(false);
+  const [Search, SetSearch] = useState("");
   const { data: productData } = useQuery({
     queryKey: [
       "products",
@@ -38,6 +42,7 @@ const Collections = () => {
       ProductBrand,
       ProductColor,
       ProductSize,
+      Search,
     ],
     queryFn: () =>
       GetApiData(
@@ -49,7 +54,8 @@ const Collections = () => {
           ProductTypes
             ? `&filters[product_types][name][$contains]=${ProductTypes}`
             : ""
-        }${
+        }${Search ? `&filters[title][$contains]=${Search}` : ""}
+        ${
           ProductBrand
             ? `&filters[brands][name][$contains]=${ProductBrand}`
             : ""
@@ -389,6 +395,18 @@ const Collections = () => {
                       <option>Date, new to old</option>
                     </select>
                   </li>
+                  <li>
+                    <div className="flex items-center shadow-md border border-gray-300 justify-between rounded-2xl h-[44px] w-[400px] px-2">
+                      <input
+                        onChange={(e) => SetSearch(e.target.value)}
+                        value={Search}
+                        type="search"
+                        className="outline-none"
+                        placeholder="Search products..."
+                      />
+                      <SearchIcon size={20} color="gray" />
+                    </div>
+                  </li>
                   <li className="flex items-center gap-2">
                     <div className="h-[42px] w-[42px] bg-[#E9EBEB] flex items-center justify-center rounded-[5px] hover:bg-black hover:text-white duration-300 cursor-pointer">
                       <Grid3x3
@@ -424,119 +442,140 @@ const Collections = () => {
                   </li>
                 </ul>
               </div>
-              <div className="mt-[20px]">
-                {LayoutOne && (
-                  <div className="grid grid-cols-3">
-                    {productData?.data
-                      ?.slice(0, LoadMoreOne)
-                      .map((item: any, idx: number) => (
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -20 }}
-                          transition={{ duration: 0.8 }}
-                        >
-                          <ProductCard
-                            key={idx}
-                            title={item?.title}
-                            oldprice={item?.oldprice}
-                            discountprice={item?.discountprice}
-                            hoverimg={item?.hoverimg.url}
-                            image={item?.image.url}
-                            color={item?.colors}
-                          />
-                        </motion.div>
-                      ))}
-                  </div>
-                )}
-                {LayoutTwo && (
-                  <div className="grid grid-cols-2">
-                    {productData?.data
-                      ?.slice(0, LoadMoreTwo)
-                      .map((item: any, idx: number) => (
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -20 }}
-                          transition={{ duration: 0.8 }}
-                        >
-                          <ProductCard
-                            key={idx}
-                            title={item?.title}
-                            oldprice={item?.oldprice}
-                            discountprice={item?.discountprice}
-                            hoverimg={item?.hoverimg.url}
-                            image={item?.image.url}
-                            color={item?.colors}
-                          />
-                        </motion.div>
-                      ))}
-                  </div>
-                )}
-                {LayoutThird && (
-                  <div className="grid grid-cols-1">
-                    {productData?.data
-                      ?.slice(0, LoadMoreThird)
-                      .map((item: any, idx: number) => (
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 10 }}
-                          exit={{ opacity: 0, y: -20 }}
-                          transition={{ duration: 0.8 }}
-                        >
-                          <ProductCard
-                            key={idx}
-                            title={item?.title}
-                            oldprice={item?.oldprice}
-                            discountprice={item?.discountprice}
-                            hoverimg={item?.hoverimg.url}
-                            image={item?.image.url}
-                            desc="IronCaptivate with this shirt’s versatile urban look that works as well at happy hour as it does in the back yard. The real mother of pearl buttons and embroidered crocodile complete its elegant appeal.Lorem ipsum dolor sit am...
+
+              {productData?.data.length === 0 ? (
+                <div className="flex items-center justify-center flex-col">
+                  <img
+                    src="https://assets-v2.lottiefiles.com/a/7b2dd664-117a-11ee-9e64-fba3b59c5600/UEUIyVlGDt.gif"
+                    alt=""
+                    className="w-[350px] h-[350px] object-cover"
+                  />
+                  <p className="text-[20px] font-bold"> "We couldn't find any matches for your search term."</p>
+                </div>
+              ) : (
+                <div className="mt-[20px]">
+                  {LayoutOne && (
+                    <div className="grid grid-cols-3">
+                      {productData?.data
+                        ?.slice(0, LoadMoreOne)
+                        .map((item: any, idx: number) => (
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.8 }}
+                          >
+                            <ProductCard
+                              key={idx}
+                              title={item?.title}
+                              oldprice={item?.oldprice}
+                              discountprice={item?.discountprice}
+                              hoverimg={item?.hoverimg.url}
+                              image={item?.image.url}
+                              color={item?.colors}
+                              addtocard={() => {
+                                AddToCard(item);
+                              }}
+                            />
+                          </motion.div>
+                        ))}
+                    </div>
+                  )}
+                  {LayoutTwo && (
+                    <div className="grid grid-cols-2">
+                      {productData?.data
+                        ?.slice(0, LoadMoreTwo)
+                        .map((item: any, idx: number) => (
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.8 }}
+                          >
+                            <ProductCard
+                              key={idx}
+                              title={item?.title}
+                              oldprice={item?.oldprice}
+                              discountprice={item?.discountprice}
+                              hoverimg={item?.hoverimg.url}
+                              image={item?.image.url}
+                              color={item?.colors}
+                              addtocard={() => {
+                                AddToCard(item);
+                              }}
+                            />
+                          </motion.div>
+                        ))}
+                    </div>
+                  )}
+                  {LayoutThird && (
+                    <div className="grid grid-cols-1">
+                      {productData?.data
+                        ?.slice(0, LoadMoreThird)
+                        .map((item: any, idx: number) => (
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 10 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.8 }}
+                          >
+                            <ProductCard
+                              key={idx}
+                              title={item?.title}
+                              oldprice={item?.oldprice}
+                              discountprice={item?.discountprice}
+                              hoverimg={item?.hoverimg.url}
+                              image={item?.image.url}
+                              desc="IronCaptivate with this shirt’s versatile urban look that works as well at happy hour as it does in the back yard. The real mother of pearl buttons and embroidered crocodile complete its elegant appeal.Lorem ipsum dolor sit am...
 "
-                            color={item?.colors}
-                            className={" flex items-start h-[400px] "}
-                          />
-                        </motion.div>
-                      ))}
-                  </div>
-                )}
-                {LayoutOne && (
-                  <div className="items-center justify-center flex mt-[15px]">
-                    <button
-                      onClick={() => {
-                        SetLoadMoreOne(LoadMoreOne + 3);
-                      }}
-                      className="bg-[#5858d9] text-white h-[50px] mt-[17px] w-[300px]  justify-center  hover:bg-[#734baf] flex items-center gap-2.5 duration-300 cursor-pointer"
-                    >
-                      Load more items
-                    </button>
-                  </div>
-                )}
-                {LayoutTwo && (
-                  <div className="items-center justify-center flex mt-[15px]">
-                    <button
-                      onClick={() => {
-                        SetLoadMoreTwo(LoadMoreTwo + 4);
-                      }}
-                      className="bg-[#5858d9] text-white h-[50px] mt-[17px] w-[300px]  justify-center  hover:bg-[#734baf] flex items-center gap-2.5 duration-300 cursor-pointer"
-                    >
-                      Load more items
-                    </button>
-                  </div>
-                )}
-                {LayoutThird && (
-                  <div className="items-center justify-center flex mt-[15px]">
-                    <button
-                      onClick={() => {
-                        SetLoadMoreThird(LoadMoreThird + 4);
-                      }}
-                      className="bg-[#5858d9] text-white h-[50px] mt-[17px] w-[300px]  justify-center  hover:bg-[#734baf] flex items-center gap-2.5 duration-300 cursor-pointer"
-                    >
-                      Load more items
-                    </button>
-                  </div>
-                )}
-              </div>
+                              addtocard={() => {
+                                AddToCard(item);
+                              }}
+                              color={item?.colors}
+                              className={" flex items-start h-[400px] "}
+                            />
+                          </motion.div>
+                        ))}
+                    </div>
+                  )}
+                  {LayoutOne && (
+                    <div className="items-center justify-center flex mt-[15px]">
+                      <button
+                        onClick={() => {
+                          SetLoadMoreOne(LoadMoreOne + 3);
+                        }}
+                        className="bg-[#5858d9] text-white h-[50px] mt-[17px] w-[300px]  justify-center  hover:bg-[#734baf] flex items-center gap-2.5 duration-300 cursor-pointer"
+                      >
+                        Load more items
+                      </button>
+                    </div>
+                  )}
+                  {LayoutTwo && (
+                    <div className="items-center justify-center flex mt-[15px]">
+                      <button
+                        onClick={() => {
+                          SetLoadMoreTwo(LoadMoreTwo + 4);
+                        }}
+                        className="bg-[#5858d9] text-white h-[50px] mt-[17px] w-[300px]  justify-center  hover:bg-[#734baf] flex items-center gap-2.5 duration-300 cursor-pointer"
+                      >
+                        Load more items
+                      </button>
+                    </div>
+                  )}
+                  {LayoutThird && (
+                    <div className="items-center justify-center flex mt-[15px]">
+                      <button
+                        onClick={() => {
+                          SetLoadMoreThird(LoadMoreThird + 4);
+                        }}
+                        className="bg-[#5858d9] text-white h-[50px] mt-[17px] w-[300px]  justify-center  hover:bg-[#734baf] flex items-center gap-2.5 duration-300 cursor-pointer"
+                      >
+                        Load more items
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

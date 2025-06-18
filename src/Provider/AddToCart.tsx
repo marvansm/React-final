@@ -20,7 +20,10 @@ export const CardProvider = ({ children }: any) => {
       );
       SetCard(NewCard);
     } else {
-      const updatedCard = [...Card, { ...product, quantity: 1 }];
+      const updatedCard = [
+        ...Card,
+        { ...product, quantity: 1, price: product.discountprice },
+      ];
       SetCard(updatedCard);
       localStorage.setItem("Product", JSON.stringify(updatedCard));
     }
@@ -46,6 +49,12 @@ export const CardProvider = ({ children }: any) => {
     return Card.reduce((acc, item) => acc + item.price * item.quantity, 0);
   };
 
+  const DeleteProduct = (item: any) => {
+    const updatedCart = Card.filter((cartItem) => cartItem.id !== item.id);
+    SetCard(updatedCart);
+    localStorage.setItem("Product", JSON.stringify(updatedCart));
+  };
+
   return (
     <CardContext.Provider
       value={{
@@ -55,6 +64,7 @@ export const CardProvider = ({ children }: any) => {
         IncreaseProduct,
         TotalPrice,
         Card,
+        DeleteProduct,
         SetCard,
       }}
     >
