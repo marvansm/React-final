@@ -5,6 +5,7 @@ import ShopPage from "./Featured/Pages/Shop/Page/shop";
 import ErrorPage from "./Featured/Pages/404/error";
 import Login from "./Featured/Pages/Login";
 import Register from "./Featured/Pages/Register";
+import DetailPage from "./Featured/Pages/Detail/Page/Detail";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
       {
         path: "/shop",
         element: <ShopPage />,
+      },
+      {
+        path: "/detail/:id",
+        element: <DetailPage />,
       },
       {
         path: "/login",

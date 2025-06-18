@@ -450,7 +450,10 @@ const Collections = () => {
                     alt=""
                     className="w-[350px] h-[350px] object-cover"
                   />
-                  <p className="text-[20px] font-bold"> "We couldn't find any matches for your search term."</p>
+                  <p className="text-[20px] font-bold">
+                    {" "}
+                    "We couldn't find any matches for your search term."
+                  </p>
                 </div>
               ) : (
                 <div className="mt-[20px]">
@@ -466,6 +469,7 @@ const Collections = () => {
                             transition={{ duration: 0.8 }}
                           >
                             <ProductCard
+                              id={item?.id}
                               key={idx}
                               title={item?.title}
                               oldprice={item?.oldprice}
@@ -494,6 +498,7 @@ const Collections = () => {
                           >
                             <ProductCard
                               key={idx}
+                              id={item?.id}
                               title={item?.title}
                               oldprice={item?.oldprice}
                               discountprice={item?.discountprice}
@@ -520,6 +525,7 @@ const Collections = () => {
                             transition={{ duration: 0.8 }}
                           >
                             <ProductCard
+                              id={item?.id}
                               key={idx}
                               title={item?.title}
                               oldprice={item?.oldprice}

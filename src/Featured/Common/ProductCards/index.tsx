@@ -16,6 +16,7 @@ import { GetApiData } from "../../../Services/api";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCard } from "../../../Provider/AddToCart";
 import { toast } from "sonner";
+import {  useNavigate } from "react-router";
 
 interface Card {
   title: string;
@@ -27,6 +28,7 @@ interface Card {
   className: any;
   desc: string;
   addtocard: any;
+  id: number;
 }
 
 const ProductCard: React.FC<Card> = ({
@@ -39,10 +41,12 @@ const ProductCard: React.FC<Card> = ({
   className,
   desc,
   addtocard,
+  id,
 }) => {
+  const navigate = useNavigate();
   const { data } = useQuery({
     queryKey: ["product"],
-    queryFn: () => GetApiData("products?populate=*"),
+    queryFn: () => GetApiData(`products?populate=*`),
   });
   const [OpenBasketModal, SetOpenBasketModal] = useState(false);
   const [DetailData, SetDetailData] = useState<Card | null>(null);
@@ -95,10 +99,14 @@ const ProductCard: React.FC<Card> = ({
           <div className={`boxContent ${className}  cursor-pointer `}>
             <div className="boximg relative">
               <img
+                onClick={() => {
+                  navigate(`/detail/${id}`);
+                }}
                 src={image}
                 alt=""
                 className={`w-full ${className} object-cover`}
               />
+
               <div
                 className={clsx(
                   styles.icon,
@@ -128,7 +136,11 @@ const ProductCard: React.FC<Card> = ({
                 </div>
               </div>
               <div className={clsx(styles.hoverimg)}>
+                {" "}
                 <img
+                  onClick={() => {
+                    navigate(`/detail/${id}`);
+                  }}
                   src={hoverimg}
                   alt=""
                   className={`w-full ${className} object-cover`}
