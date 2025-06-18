@@ -206,7 +206,15 @@ const ProductCard: React.FC<Card> = ({
             transition={{ duration: 0.3 }}
             className="bg-white shadow-lg rounded-2xl w-[900px] h-[500px] absolute top-1/2 left-1/2 overflow-hidden transform -translate-x-1/2 -translate-y-1/2 z-[9999] p-8"
           >
-            <div className="grid grid-cols-12">
+            <div
+              onClick={() => {
+                SetDetailData(null);
+              }}
+              className="absolute right-2.5 top-2.5"
+            >
+              <X />
+            </div>
+            <div className="grid grid-cols-12 gap-4 items-center">
               <div className="col-span-6">
                 <div className="w-full h-full">
                   <img
