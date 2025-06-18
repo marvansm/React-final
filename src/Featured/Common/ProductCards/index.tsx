@@ -19,16 +19,16 @@ import { toast } from "sonner";
 import {  useNavigate } from "react-router";
 
 interface Card {
-  title: string;
-  image: string;
-  hoverimg: string;
-  oldprice: number;
-  discountprice: number;
-  color: string[];
-  className: any;
-  desc: string;
-  addtocard: any;
-  id: number;
+  title?: string;
+  image?: string;
+  hoverimg?: string;
+  oldprice?: number;
+  discountprice?: number;
+  color?: string[];
+  className?: any;
+  desc?: string;
+  addtocard?: any;
+  id?: number;
 }
 
 const ProductCard: React.FC<Card> = ({
@@ -49,7 +49,7 @@ const ProductCard: React.FC<Card> = ({
     queryFn: () => GetApiData(`products?populate=*`),
   });
   const [OpenBasketModal, SetOpenBasketModal] = useState(false);
-  const [DetailData, SetDetailData] = useState<Card | null>(null);
+  const [DetailData, SetDetailData] = useState<Card | any>(null);
 
   const GetDataOnClick = (product: any) => {
     SetDetailData(product);
