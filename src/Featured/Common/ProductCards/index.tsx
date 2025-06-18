@@ -45,6 +45,13 @@ const ProductCard: React.FC<Card> = ({
     queryFn: () => GetApiData("products?populate=*"),
   });
   const [OpenBasketModal, SetOpenBasketModal] = useState(false);
+  const [DetailData, SetDetailData] = useState<Card | null>(null);
+
+  const GetDataOnClick = (product: any) => {
+    SetDetailData(product);
+  };
+
+  console.log(DetailData);
   const BgColorsSetter = (name: any) => {
     switch (name) {
       case "black":
@@ -101,7 +108,22 @@ const ProductCard: React.FC<Card> = ({
                 <div className="w-[50px] h-[50px] flex items-center justify-center bg-[#5858d9] hover:bg-[#515192] duration-300 text-white rounded-full">
                   <Heart size={23} />
                 </div>
-                <div className="w-[50px] h-[50px] flex items-center justify-center bg-[#5858d9]  hover:bg-[#515192] duration-300 text-white rounded-full">
+                <div
+                  onClick={() => {
+                    GetDataOnClick({
+                      title,
+                      image,
+                      hoverimg,
+                      oldprice,
+                      discountprice,
+                      color,
+                      className,
+                      desc,
+                      addtocard,
+                    });
+                  }}
+                  className="w-[50px] h-[50px] flex items-center justify-center bg-[#5858d9]  hover:bg-[#515192] duration-300 text-white rounded-full"
+                >
                   <Images size={23} />
                 </div>
               </div>
@@ -170,6 +192,90 @@ const ProductCard: React.FC<Card> = ({
           </div>
         </div>
       </div>
+      {DetailData && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-[#ffffff7f] backdrop-blur-[3px] z-[7777]"
+        >
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0, y: 50 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.95, opacity: 0, y: 50 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white shadow-lg rounded-2xl w-[900px] h-[500px] absolute top-1/2 left-1/2 overflow-hidden transform -translate-x-1/2 -translate-y-1/2 z-[9999] p-8"
+          >
+            <div className="grid grid-cols-12">
+              <div className="col-span-6">
+                <div className="w-full h-full">
+                  <img
+                    src={DetailData.image}
+                    className="w-full h-full object-cover"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div className="col-span-6">
+                <h1
+                  className="text-[18px] font-bold text-[#1c1c1f
+]"
+                >
+                  {DetailData.title}
+                </h1>
+                <div className="flex items-center mt-3">
+                  <Star size={18} />
+                  <Star size={18} />
+                  <Star size={18} />
+                  <Star size={18} />
+                  <Star size={18} />
+                </div>
+                <h3 className="text-[24px] font-bold text-[#1c1c1f] mt-3">
+                  {" "}
+                  $ {DetailData.discountprice}
+                </h3>
+                <div className="mt-4">
+                  <h3 className="text-[11px] font-bold uppercase">
+                    Color: Orchid
+                  </h3>
+                  <ul className="flex items-center gap-1 mt-[25px]">
+                    <li className="border border-gray-300 rounded-full p-0.5">
+                      <div
+                        className={clsx(
+                          "w-[26px] h-[26px] rounded-full",
+                          BgColorsSetter(DetailData?.color?.name)
+                        )}
+                      ></div>
+                    </li>
+                  </ul>
+                </div>
+                <div className="mt-4">
+                  <h2 className="text-[11px] font-bold uppercase mb-2">
+                    Quantity:
+                  </h2>
+                  <div className="flex items-center gap-2">
+                    <ul className="flex items-center justify-between gap-5  border border-gray-300 w-[140px] h-[50px] px-1">
+                      <li className="hover:text-blue-500 cursor-pointer">
+                        <Minus size={13} strokeWidth={1} />
+                      </li>
+                      <li>1</li>
+                      <li className="hover:text-blue-500 cursor-pointer">
+                        <Plus size={13} strokeWidth={1} />
+                      </li>
+                    </ul>
+                    <button className="h-[50px] bg-[#EFEFEF] font-bold text-[#222]  text-[11px] w-full hover:bg-[#0D53C9] duration-300 hover:text-white  uppercase shadow-sm">
+                      pre-order
+                    </button>
+                  </div>
+                  <button className="h-[50px] mt-4 border border-gray-200 bg-[#fff] shadow-md font-bold text-[#222]  text-[11px]  hover:bg-[#0D53C9] duration-300 hover:text-white  uppercase w-full">
+                    Buy it now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
       <AnimatePresence>
         {OpenBasketModal && (
           <motion.div

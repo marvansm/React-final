@@ -92,18 +92,6 @@ const Login = () => {
               </form>
             </div>
 
-            <div className="text-white font-normal text-center mt-[16px]">
-              <p
-                onClick={() => {
-                  navigate("/register");
-                }}
-                className="cursor-pointer"
-              >
-                Don't you have an account?{" "}
-                <span className="text-blue-600">Sign Up</span>
-              </p>
-              <p className="text-[#777]">Activate License</p>
-            </div>
           </div>
         </div>
       </div>

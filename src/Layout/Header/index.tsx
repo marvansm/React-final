@@ -214,7 +214,7 @@ const Header = () => {
               </div>
             )}
           </AnimatePresence>
-             <AnimatePresence>
+          <AnimatePresence>
             {OpenLogin && (
               <div className="fixed inset-0 bg-[#ffffff4f] backdrop-blur-[4px] w-full h-full z-[999]">
                 <motion.div
@@ -243,7 +243,13 @@ const Header = () => {
                       >
                         Login
                       </li>
-                      <li className="hover:text-blue-500 duration-300 cursor-pointer">
+                      <li
+                        onClick={() => {
+                          navigate("/register");
+                          SetOpenLogin(false);
+                        }}
+                        className="hover:text-blue-500 duration-300 cursor-pointer"
+                      >
                         Register
                       </li>
                       <li className="hover:text-blue-500 duration-300 cursor-pointer">
@@ -471,7 +477,13 @@ const Header = () => {
                       >
                         Login
                       </li>
-                      <li className="hover:text-blue-500 duration-300 cursor-pointer">
+                      <li
+                        onClick={() => {
+                          navigate("/register");
+                          SetOpenLogin(false);
+                        }}
+                        className="hover:text-blue-500 duration-300 cursor-pointer"
+                      >
                         Register
                       </li>
                       <li className="hover:text-blue-500 duration-300 cursor-pointer">
